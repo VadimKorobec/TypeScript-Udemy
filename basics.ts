@@ -1,16 +1,11 @@
-function add(n1: number, n2: number, showResult: boolean, phrase: string) {
-  const result = n1 + n2;
-  if (showResult) {
-    console.log(phrase + result);
+const add = (a: number | string, b: number | string) => {
+  if (typeof a === "number" && typeof b === "number") {
+    return a + b;
   } else {
-    return result;
+    return `${a}-${b}`;
   }
-}
+};
 
-const number1 = 5;
-const number2 = 2.8;
-const printResult = true;
-const resultPhrase = "Result is";
+let val:{} = 'abc' 
 
-const result = add(number1, number2, printResult, resultPhrase);
-console.log(result);
+console.log(add('hello', 2));
