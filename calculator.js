@@ -1,5 +1,6 @@
-var calculateInvestment = function (data) {
-    var initialAmount = data.initialAmount, annualContribution = data.annualContribution, expectedReturn = data.expectedReturn, duration = data.duration;
+"use strict";
+const calculateInvestment = (data) => {
+    const { initialAmount, annualContribution, expectedReturn, duration } = data;
     if (initialAmount < 0) {
         return "Initial investment ammount must be at least zero.";
     }
@@ -9,43 +10,42 @@ var calculateInvestment = function (data) {
     if (expectedReturn < 0) {
         return "Expected return must be at least zero";
     }
-    var total = initialAmount;
-    var totalContributions = 0;
-    var totalInterestEarned = 0;
-    var annualResults = [];
-    for (var i = 0; i < duration; i += 1) {
+    let total = initialAmount;
+    let totalContributions = 0;
+    let totalInterestEarned = 0;
+    const annualResults = [];
+    for (let i = 0; i < duration; i += 1) {
         total = total * (1 + expectedReturn);
         totalInterestEarned = total - totalContributions - initialAmount;
         totalContributions = totalContributions + annualContribution;
         total = total + annualContribution;
         annualResults.push({
-            year: "Year ".concat(i + 1),
+            year: `Year ${i + 1}`,
             totalAmount: total,
-            totalInterestEarned: totalInterestEarned,
-            totalContributions: totalContributions,
+            totalInterestEarned,
+            totalContributions,
         });
     }
     return annualResults;
 };
-var printResults = function (results) {
+const printResults = (results) => {
     if (typeof results === "string") {
         console.log(results);
         return;
     }
-    for (var _i = 0, results_1 = results; _i < results_1.length; _i++) {
-        var result = results_1[_i];
+    for (const result of results) {
         console.log(result.year);
-        console.log("Total: ".concat(result.totalAmount.toFixed(0)));
-        console.log("Total Contributions: ".concat(result.totalContributions.toFixed(0)));
-        console.log("Total Interest Earned: ".concat(result.totalInterestEarned.toFixed(0)));
+        console.log(`Total: ${result.totalAmount.toFixed(0)}`);
+        console.log(`Total Contributions: ${result.totalContributions.toFixed(0)}`);
+        console.log(`Total Interest Earned: ${result.totalInterestEarned.toFixed(0)}`);
         console.log("--------------------------");
     }
 };
-var investmentData = {
+const investmentData = {
     initialAmount: 5000,
     annualContribution: 500,
     expectedReturn: 0.08,
     duration: 10,
 };
-var results = calculateInvestment(investmentData);
+const results = calculateInvestment(investmentData);
 printResults(results);
